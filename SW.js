@@ -4,8 +4,11 @@ let msecEl = document.getElementById("msec");
 
 let startbttn = document.getElementById("startbutton");
 let resetbttn = document.getElementById("resetbutton");
+let lapbttn = document.getElementById("lapbutton");
+let lapsContainer = document.getElementById("lapsContainer");
 
 let msec = 0, secs = 0, mins = 0;
+let lapCount = 0;
 let timeId = null;
 let isRunning = false;
 let isPaused = false;
@@ -43,7 +46,42 @@ resetbttn.addEventListener("click", function () {
   isPaused = false;
   startbttn.textContent = "Start";
   startbttn.style.setProperty("--clr", "green");
+
+  lapCount = 0;
+  lapsContainer.innerHTML = "";
 });
+
+lapbttn.addEventListener("click", function () {
+  if (isRunning) {
+    lapCount++;
+    addLaps(mins, secs, msec, lapCount);
+  }
+});
+
+function addLaps(minutes, seconds, milliseconds, lapNumber) {
+  const lapItem = document.createElement("div");
+  lapItem.className = "lap-item";
+  
+  const formattedMins = minutes < 10 ? "0" + minutes : minutes.toString();
+  const formattedSecs = seconds < 10 ? "0" + seconds : seconds.toString();
+  const formattedMsec = milliseconds < 10 ? "0" + milliseconds : milliseconds.toString();
+  
+  lapItem.innerHTML = `
+    <div class="lap-number">#${lapNumber}</div>
+    <div class="lap-time">
+      <span class="lap-digit">${formattedMins.charAt(0)}</span>
+      <span class="lap-digit">${formattedMins.charAt(1)}</span>
+      <span>:</span>
+      <span class="lap-digit">${formattedSecs.charAt(0)}</span>
+      <span class="lap-digit">${formattedSecs.charAt(1)}</span>
+      <span>:</span>
+      <span class="lap-digit">${formattedMsec.charAt(0)}</span>
+      <span class="lap-digit">${formattedMsec.charAt(1)}</span>
+    </div>
+  `;
+  
+  lapsContainer.appendChild(lapItem);
+}
 
 function timeUpdate() {
   msec++;

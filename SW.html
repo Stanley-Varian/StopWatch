@@ -8,18 +8,25 @@
   <title>Stop Watch</title>
 </head>
 <body>
-  <div class="stopwatch">
-    <div class="time">00 : 00 : 00</div>
+  <div class="backbordertime">
+    <div class="stopwatch">
+      <div class="time">
+        <span class="digit" id="mins">00</span> :
+        <span class="digit" id="secs">00</span> :
+        <span class="digit" id="msec">00</span>
+      </div>
+    </div>
+
+    <div class="button">
+      <button id="startbutton" class="bttn" style="--clr: green;">Start</button>
+      <button id="resetbutton" class="bttn" style="--clr: red;">Reset</button>
+      <button id="lapbutton" class="bttn" style="--clr: orange;">Lap</button>
+    </div>
   </div>
 
-  <div class="button">
-    <button id="startbutton" class="bttn" style="--clr: green;">Start</button>
-    <button id="resetbutton" class="bttn" style="--clr: red;">Reset</button>
-    <button id="lapbutton" class="bttn" style="--clr: orange;">Lap</button>
-  </div>
-
-  <div class="laps">
-    <ul id="lapsList"></ul>
+  <div class="backborderlaps">
+    <div class="lapsbttn" id="lapsContainer">
+    </div>
   </div>
 
   <script src="SW.js"></script>
